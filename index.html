@@ -75,13 +75,24 @@
       position: relative;
       overflow: hidden; /* Prevent scrollbars if pattern scales */
     }
-    /* Dot Matrix Background */
+    /* Animated 3D Dot Matrix */
+    @keyframes matrix-drift {
+      0% { background-position: 0 0, 0 0; }
+      100% { background-position: 60px 60px, -60px 30px; }
+    }
     .hero::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1.5px, transparent 1.5px);
-      background-size: 30px 30px;
-      mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-      -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+      /* Two layers for 3D parallax depth */
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px), /* Front layer */
+        radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px); /* Back layer */
+      background-size: 60px 60px, 30px 30px;
+      
+      /* Vignette mask to fade edges */
+      mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+      
+      animation: matrix-drift 60s linear infinite;
       pointer-events: none; z-index: 0;
     }
     .hero > * { position: relative; z-index: 1; } /* Keep content above dots */
