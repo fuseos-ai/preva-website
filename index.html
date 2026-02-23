@@ -73,10 +73,22 @@
       align-items: center; justify-content: center; text-align: center;
       padding: 8rem 2rem 6rem;
       position: relative;
+      overflow: hidden; /* Prevent scrollbars if pattern scales */
     }
+    /* Dot Matrix Background */
+    .hero::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1.5px, transparent 1.5px);
+      background-size: 30px 30px;
+      mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+      pointer-events: none; z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; } /* Keep content above dots */
     .hero::after {
       content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
       background: linear-gradient(transparent, var(--hero-dark));
+      z-index: 2; pointer-events: none;
     }
     .hero-wordmark {
       font-size: clamp(4rem, 12vw, 8.125rem); font-weight: 800;
