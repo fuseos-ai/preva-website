@@ -91,8 +91,12 @@ nav.scrolled {
 .nav-logo {
   font-weight: 800;
   font-size: 1.3rem;
-  letter-spacing: 0.1167em;
+  letter-spacing: 0.5em;
   color: var(--white);
+  /* Nav logo is left-aligned, so no text-indent needed usually, 
+     but let's check if it needs compensation. 
+     Actually, for left-aligned text, letter-spacing adds space to the right 
+     of the last letter, which is fine. */
 }
 
 .nav-links {
@@ -166,7 +170,8 @@ nav.scrolled {
 .hero-wordmark {
   font-size: clamp(4rem, 12vw, 8.125rem);
   font-weight: 800;
-  letter-spacing: 0.1167em;
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
   color: var(--white);
   line-height: 1;
   margin-bottom: 24px;
@@ -189,7 +194,8 @@ nav.scrolled {
   font-size: clamp(1rem, 2vw, 1.25rem);
   color: var(--white);
   font-weight: 300;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.0667em;
+  text-transform: uppercase;
   opacity: 0;
   transform: translateY(15px);
   transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1074,7 +1080,8 @@ footer {
 .footer-logo {
   font-weight: 800;
   font-size: 1.1rem;
-  letter-spacing: 0.1167em;
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
   color: var(--white);
   margin-bottom: 20px;
 }
@@ -1121,7 +1128,7 @@ footer {
 }
 
 @media (max-width: 600px) {
-  .hero-wordmark { letter-spacing: 0.1167em; }
+  .hero-wordmark { letter-spacing: 0.5em; text-indent: 0.5em; }
   .feature-card { padding: 28px 24px; }
   .preva-chat-chips { flex-direction: column; align-items: center; }
   .preva-chip { white-space: normal; text-align: center; }
