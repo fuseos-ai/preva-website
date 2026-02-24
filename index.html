@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PREVA — Your AI. Always.</title>
-  <meta name="description" content="PREVA is AI that knows you, remembers everything, and takes action. Private. Powerful. Yours.">
+  <meta name="description" content="PREVA is the first AI that actually lives with you. It learns who you are, remembers your life, and grows with you over time.">
   <meta property="og:title" content="PREVA — Your AI. Always.">
-  <meta property="og:description" content="AI that knows you, remembers everything, and takes action.">
+  <meta property="og:description" content="The first AI that actually lives with you. Private. Powerful. Yours.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://preva.ai">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="PREVA — Your AI. Always.">
-  <meta name="twitter:description" content="AI that knows you, remembers everything, and takes action.">
+  <meta name="twitter:description" content="The first AI that actually lives with you. Private. Powerful. Yours.">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
@@ -78,9 +78,9 @@
     }
     #hero-canvas {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 0; opacity: 0.6; /* Subtle blend */
+      z-index: 0; opacity: 0.6;
     }
-    .hero > * { position: relative; z-index: 1; } /* Keep content above canvas */
+    .hero > * { position: relative; z-index: 1; }
     .hero::after {
       content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
       background: linear-gradient(transparent, var(--hero-dark));
@@ -90,7 +90,7 @@
       font-size: clamp(4rem, 12vw, 8.125rem); font-weight: 800;
       letter-spacing: 0.3em; margin-bottom: 1.5rem;
       color: var(--white);
-      margin-right: -0.3em; /* Visual centering fix to offset trailing letter-spacing */
+      margin-right: -0.3em;
     }
     .hero-tagline {
       font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-weight: 300;
@@ -105,10 +105,6 @@
       transform: translateY(-2px); text-decoration: none;
       box-shadow: 0 8px 30px rgba(228,200,168,0.3);
     }
-    .hero-sub {
-      margin-top: 1.5rem; font-size: 0.9rem; color: var(--muted);
-      font-weight: 400;
-    }
 
     /* SECTIONS */
     section { padding: 7rem 2rem; max-width: 1200px; margin: 0 auto; }
@@ -121,167 +117,111 @@
       margin-bottom: 1.5rem; line-height: 1.2; letter-spacing: 2px;
     }
     .section-desc {
-      font-size: 1rem; color: var(--muted); max-width: 700px;
+      font-size: 1.05rem; color: var(--muted); max-width: 700px;
       line-height: 1.8; font-weight: 400;
     }
     .section-desc.center { margin: 0 auto; text-align: center; }
 
-    /* WHAT IS PREVA */
-    .what { text-align: center; }
-    .what .section-title span { color: var(--sunlight); }
-    .what-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
-      margin-top: 4rem;
+    /* PITCH */
+    .pitch { text-align: center; }
+    .pitch .section-title span { color: var(--sunlight); }
+    .pitch-body {
+      max-width: 700px; margin: 2rem auto 0;
+      font-size: 1.1rem; color: var(--muted); line-height: 1.9;
     }
-    .what-card {
-      background: var(--surface-dark); border: 1px solid var(--border-dark);
-      border-radius: 12px; padding: 2.5rem 2rem; text-align: left;
-      transition: border-color 0.3s, transform 0.3s;
+    .pitch-body p { margin-bottom: 1.5rem; }
+    .pitch-highlight {
+      font-size: 1.2rem; color: var(--white); font-weight: 600;
+      margin-top: 2rem;
     }
-    .what-card:hover { border-color: var(--sunlight); transform: translateY(-4px); }
-    .what-card-icon {
-      margin-bottom: 1rem; width: 40px; height: 40px;
-    }
-    .what-card-icon svg, .feature-icon svg, .usecase-icon svg {
-      width: 100%; height: 100%; stroke: var(--sunlight); stroke-width: 1.5;
-      fill: none; stroke-linecap: round; stroke-linejoin: round;
-    }
-    .what-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; letter-spacing: 1px; }
-    .what-card p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
 
-    /* HOW IT WORKS */
-    .how { text-align: center; }
-    .steps {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem;
-      margin-top: 4rem; position: relative;
+    /* TIMELINE (How It Feels) */
+    .timeline { text-align: center; }
+    .timeline-grid {
+      display: grid; grid-template-columns: 1fr; gap: 0;
+      margin-top: 4rem; max-width: 700px; margin-left: auto; margin-right: auto;
+      position: relative;
     }
-    .steps::before {
-      content: ''; position: absolute; top: 3rem; left: 15%; right: 15%;
-      height: 2px; background: var(--border-dark);
+    .timeline-grid::before {
+      content: ''; position: absolute; top: 0; bottom: 0; left: 1.5rem;
+      width: 2px; background: var(--border-dark);
     }
-    .step { position: relative; text-align: center; }
-    .step-num {
-      width: 4rem; height: 4rem; border-radius: 50%;
-      background: var(--sunlight); color: var(--hero-dark);
-      font-weight: 900; font-size: 1.5rem;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 1.5rem; position: relative; z-index: 1;
+    .timeline-item {
+      display: flex; gap: 2rem; text-align: left; padding: 2rem 0;
+      position: relative;
     }
-    .step h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem; }
-    .step p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; max-width: 280px; margin: 0 auto; }
+    .timeline-dot {
+      width: 3rem; height: 3rem; min-width: 3rem; border-radius: 50%;
+      background: var(--sunlight); display: flex; align-items: center;
+      justify-content: center; position: relative; z-index: 1;
+    }
+    .timeline-dot-inner {
+      width: 0.75rem; height: 0.75rem; border-radius: 50%;
+      background: var(--hero-dark);
+    }
+    .timeline-content h3 {
+      font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;
+      color: var(--sunlight); letter-spacing: 1px;
+    }
+    .timeline-content p {
+      font-size: 1rem; color: var(--muted); line-height: 1.7;
+    }
 
-    /* FEATURES */
-    .features { text-align: center; }
-    .features-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-      margin-top: 4rem;
+    /* NARRATIVE FEATURES (What Makes It Different) */
+    .narrative { text-align: center; }
+    .narrative-intro {
+      max-width: 700px; margin: 0 auto 3rem;
+      font-size: 1.05rem; color: var(--muted); line-height: 1.8;
     }
-    .feature {
-      background: var(--surface-dark); border: 1px solid var(--border-dark);
-      border-radius: 12px; padding: 2rem 1.5rem; text-align: left;
-      transition: border-color 0.3s;
-    }
-    .feature:hover { border-color: rgba(228,200,168,0.4); }
-    .feature-icon { margin-bottom: 0.75rem; width: 32px; height: 32px; }
-    .feature h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px; }
-    .feature p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
-
-    /* USE CASES */
-    .usecases { text-align: center; }
-    .usecase-grid {
+    .narrative-blocks {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;
-      margin-top: 4rem;
+      margin-top: 2rem;
     }
-    .usecase {
+    .narrative-block {
       background: var(--surface-dark); border: 1px solid var(--border-dark);
       border-radius: 16px; padding: 2.5rem; text-align: left;
-      position: relative; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
     }
-    .usecase::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--sunlight), transparent);
+    .narrative-block:hover { border-color: var(--sunlight); transform: translateY(-4px); }
+    .narrative-block h3 {
+      font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;
+      letter-spacing: 1px;
     }
-    .usecase-icon { margin-bottom: 1rem; width: 40px; height: 40px; }
-    .usecase h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; }
-    .usecase p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
-    .usecase .quote {
-      margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-dark);
-      font-style: italic; color: var(--sunlight); font-size: 0.9rem;
+    .narrative-block p {
+      font-size: 0.95rem; color: var(--muted); line-height: 1.8;
     }
 
-    /* PRICING */
-    .pricing { text-align: center; }
-    .pricing-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
-      margin-top: 4rem; align-items: start;
+    /* BUILT FOR HUMANS */
+    .humans { text-align: center; }
+    .humans-body {
+      max-width: 700px; margin: 2rem auto 0;
+      font-size: 1.05rem; color: var(--muted); line-height: 2;
     }
-    .plan {
-      background: var(--surface-dark); border: 1px solid var(--border-dark);
-      border-radius: 16px; padding: 2.5rem 2rem; text-align: center;
-      position: relative; transition: transform 0.3s, border-color 0.3s;
+    .humans-body p { margin-bottom: 1.5rem; }
+    .humans-list {
+      max-width: 700px; margin: 2rem auto 0; text-align: left;
+      list-style: none;
     }
-    .plan:hover { transform: translateY(-4px); }
-    .plan.featured {
-      border-color: var(--sunlight);
-      box-shadow: 0 0 40px rgba(228,200,168,0.1);
+    .humans-list li {
+      font-size: 1.05rem; color: var(--muted); line-height: 1.8;
+      padding: 0.75rem 0; border-bottom: 1px solid var(--border-dark);
     }
-    .plan.featured::before {
-      content: 'MOST POPULAR'; position: absolute; top: -12px; left: 50%;
-      transform: translateX(-50%); background: var(--sunlight); color: var(--hero-dark);
-      font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em;
-      padding: 0.3rem 1rem; border-radius: 20px;
-    }
-    .plan-name {
-      font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em;
-      color: var(--sunlight); text-transform: uppercase; margin-bottom: 0.5rem;
-    }
-    .plan-price {
-      font-size: 3rem; font-weight: 900; margin-bottom: 0.25rem;
-    }
-    .plan-price span { font-size: 1rem; font-weight: 400; color: var(--muted); }
-    .plan-desc {
-      font-size: 0.9rem; color: var(--muted); margin-bottom: 2rem;
-    }
-    .plan-features { list-style: none; text-align: left; margin-bottom: 2rem; }
-    .plan-features li {
-      padding: 0.5rem 0; font-size: 0.9rem; color: var(--muted);
-      border-bottom: 1px solid var(--border-dark);
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .plan-features li::before { content: '✓'; color: var(--sunlight); font-weight: 700; }
-    .plan-btn {
-      display: block; padding: 0.85rem; border-radius: 8px;
-      font-weight: 700; font-size: 0.95rem; text-align: center;
-      border: 2px solid var(--border-dark); color: var(--white);
-      transition: all 0.2s;
-    }
-    .plan-btn:hover { border-color: var(--sunlight); text-decoration: none; }
-    .plan.featured .plan-btn {
-      background: var(--sunlight); color: var(--hero-dark); border-color: var(--sunlight);
+    .humans-list li em { color: var(--white); font-style: normal; font-weight: 600; }
+    .humans-quote {
+      margin-top: 3rem; font-style: italic; font-size: 1.2rem;
+      color: var(--sunlight);
     }
 
-    /* TESTIMONIALS */
-    .testimonials { text-align: center; }
-    .testimonial-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
-      margin-top: 4rem;
+    /* VISION */
+    .vision { text-align: center; }
+    .vision-body {
+      max-width: 700px; margin: 2rem auto 0;
+      font-size: 1.1rem; color: var(--muted); line-height: 2;
     }
-    .testimonial {
-      background: var(--surface-dark); border: 1px solid var(--border-dark);
-      border-radius: 12px; padding: 2rem; text-align: left;
+    .vision-body p { margin-bottom: 1.5rem; }
+    .vision-body .emphasis {
+      color: var(--white); font-weight: 600; font-size: 1.15rem;
     }
-    .testimonial-text {
-      font-size: 1.1rem; font-style: italic; line-height: 1.7;
-      margin-bottom: 1.5rem; color: rgba(255,255,255,0.9);
-    }
-    .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
-    .testimonial-avatar {
-      width: 40px; height: 40px; border-radius: 50%;
-      background: var(--border-dark); display: flex; align-items: center;
-      justify-content: center; font-weight: 700; font-size: 0.9rem; color: var(--sunlight);
-    }
-    .testimonial-name { font-weight: 700; font-size: 0.9rem; }
-    .testimonial-role { font-size: 0.8rem; color: var(--muted); }
 
     /* FAQ */
     .faq { max-width: 800px; }
@@ -300,7 +240,7 @@
     }
     .faq-item.open .faq-a { max-height: 300px; padding-top: 1rem; }
 
-    /* CTA */
+    /* WAITLIST CTA */
     .final-cta {
       text-align: center; padding: 8rem 2rem;
       max-width: 800px; margin: 0 auto;
@@ -341,11 +281,7 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      .what-grid, .features-grid, .steps, .pricing-grid, .testimonial-grid {
-        grid-template-columns: 1fr;
-      }
-      .usecase-grid { grid-template-columns: 1fr; }
-      .steps::before { display: none; }
+      .narrative-blocks { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       .nav-toggle { display: block; }
       .nav-links.open {
@@ -374,228 +310,121 @@
     <div class="nav-logo">PREVA</div>
     <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
     <div class="nav-links">
-      <a href="#what">About</a>
-      <a href="#how">How It Works</a>
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
+      <a href="#pitch">About</a>
+      <a href="#feels">How It Feels</a>
+      <a href="#different">Features</a>
       <a href="#faq">FAQ</a>
-      <a href="#cta" class="nav-cta">Get Started</a>
+      <a href="#cta" class="nav-cta">Join Waitlist</a>
     </div>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
+    <canvas id="hero-canvas"></canvas>
     <div class="hero-wordmark">PREVA</div>
     <div class="hero-tagline">Your AI. Always.</div>
     <a href="#cta" class="hero-cta">Meet Your AI</a>
-    <p class="hero-sub">It remembers. It does things. It's yours.</p>
   </section>
 
-  <!-- WHAT IS PREVA -->
-  <section class="what fade-in" id="what">
+  <!-- THE PITCH -->
+  <section class="pitch fade-in" id="pitch">
     <div class="section-label">What is PREVA</div>
-    <div class="section-title">AI that actually <span>knows you</span></div>
-    <div class="section-desc center">
-      Not another chatbot. Not another search engine with a personality.
-      PREVA builds AI that remembers your life, understands your world,
-      and takes real action on your behalf. Private. Powerful. Yours.
+    <div class="section-title">This changes <span>everything.</span></div>
+    <div class="pitch-body">
+      <p>Not another chatbot. Not another search engine with a personality.</p>
+      <p>PREVA is the first AI that actually lives with you. It learns who you are — not just what you ask. It remembers your life, understands your world, and grows with you over time.</p>
+      <p class="pitch-highlight">One person. One AI. No starting over. Ever.</p>
     </div>
-    <div class="what-grid">
-      <div class="what-card">
-        <div class="what-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 0 1 0 14 7 7 0 0 1 0-14M8.5 9a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1M15.5 9a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1M9 16c.8 1.2 1.8 2 3 2s2.2-.8 3-2"/><path d="M12 2C9 2 7 4.5 7 7.5c0 2 1 3.5 2 4.5M12 2c3 0 5 2.5 5 5.5 0 2-1 3.5-2 4.5"/></svg></div>
-        <h3>It Remembers</h3>
-        <p>Your AI remembers every conversation, every preference, every detail. No more repeating yourself. No more starting over. It knows you better every day.</p>
+  </section>
+
+  <!-- HOW IT FEELS -->
+  <section class="timeline fade-in" id="feels">
+    <div class="section-label">What It's Like</div>
+    <div class="section-title">How it feels</div>
+    <div class="timeline-grid">
+      <div class="timeline-item">
+        <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+        <div class="timeline-content">
+          <h3>Day one.</h3>
+          <p>You talk. It listens. It remembers your name, your priorities, your voice.</p>
+        </div>
       </div>
-      <div class="what-card">
-        <div class="what-card-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-        <h3>It Acts</h3>
-        <p>Send emails. Schedule meetings. Manage your calendar. Research anything. Your AI doesn't just answer questions — it does the work.</p>
+      <div class="timeline-item">
+        <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+        <div class="timeline-content">
+          <h3>Week one.</h3>
+          <p>It knows your schedule, your family, your habits. It handles things before you ask.</p>
+        </div>
       </div>
-      <div class="what-card">
-        <div class="what-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg></div>
-        <h3>It's Yours</h3>
-        <p>Your data stays yours. Your AI is private, personal, and built for you alone. No training on your conversations. No sharing. Ever.</p>
+      <div class="timeline-item">
+        <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+        <div class="timeline-content">
+          <h3>Month one.</h3>
+          <p>It feels like it's always been there. Not a tool you open — a presence that's just... there.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+        <div class="timeline-content">
+          <h3>Always.</h3>
+          <p>It never forgets. It never judges. It never leaves.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section class="how fade-in" id="how">
-    <div class="section-label">How It Works</div>
-    <div class="section-title">Three steps to your AI</div>
-    <div class="section-desc center">No code. No setup wizards. Just a conversation.</div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <h3>Choose Your AI</h3>
-        <p>Pick a plan that fits your life. Personal assistant, business partner, or full enterprise team — we scale with you.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <h3>Teach It About You</h3>
-        <p>Just talk to it. Share what matters. Your AI learns from every interaction — no forms, no configuration, no manual setup.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <h3>Let It Handle the Rest</h3>
-        <p>Email, scheduling, research, reminders, creative work — your AI takes action so you can focus on what actually matters.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="features fade-in" id="features">
+  <!-- WHAT MAKES IT DIFFERENT -->
+  <section class="narrative fade-in" id="different">
     <div class="section-label">Features</div>
-    <div class="section-title">Everything you need. Nothing you don't.</div>
-    <div class="features-grid">
-      <div class="feature">
-        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg></div>
-        <h3>Persistent Memory</h3>
-        <p>Your AI remembers every conversation, every preference, and every detail — across sessions, forever.</p>
+    <div class="section-title">This isn't what you think AI is.</div>
+    <div class="narrative-intro">
+      Every AI you've used starts over every time you open it. You repeat yourself. You re-explain. You start from zero. Every. Single. Time. PREVA doesn't.
+    </div>
+    <div class="narrative-blocks">
+      <div class="narrative-block">
+        <h3>It remembers everything.</h3>
+        <p>Every conversation. Every preference. Every detail about your life. Yesterday, last month, last year. Your history isn't lost — it's your advantage.</p>
       </div>
-      <div class="feature">
-        <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-        <h3>Real Actions</h3>
-        <p>Send emails, manage calendars, search the web, create documents, and automate workflows.</p>
+      <div class="narrative-block">
+        <h3>It actually does things.</h3>
+        <p>Not just answers — actions. It sends emails, manages your schedule, does research, creates documents, makes calls. You say it. It does it.</p>
       </div>
-      <div class="feature">
-        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3>Private by Default</h3>
-        <p>Your conversations are yours. We don't train on your data. We don't sell it. Period.</p>
+      <div class="narrative-block">
+        <h3>It becomes yours.</h3>
+        <p>Your AI learns your voice, your humor, your shorthand. It stops sounding like a machine and starts sounding like someone who knows you. Because it does.</p>
       </div>
-      <div class="feature">
-        <div class="feature-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
-        <h3>Works Where You Do</h3>
-        <p>Telegram, Signal, WhatsApp, Slack, email, web — your AI meets you on every platform.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-        <h3>Learns Your Style</h3>
-        <p>Your AI adapts to your voice, your preferences, your way of working. It gets better the more you use it.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <h3>Never Sleeps</h3>
-        <p>24/7 availability. Your AI is always on, always ready, always watching out for you.</p>
+      <div class="narrative-block">
+        <h3>It belongs to you.</h3>
+        <p>Your conversations never train someone else's AI. Your data never leaves. No ads. No profiling. No sharing. It exists for you alone.</p>
       </div>
     </div>
   </section>
 
-  <!-- USE CASES -->
-  <section class="usecases fade-in" id="usecases">
+  <!-- BUILT FOR HUMANS -->
+  <section class="humans fade-in" id="humans">
     <div class="section-label">Who It's For</div>
-    <div class="section-title">Built for people who build things</div>
-    <div class="section-desc center">PREVA isn't a one-size-fits-all chatbot. Every AI is as unique as the person behind it.</div>
-    <div class="usecase-grid">
-      <div class="usecase">
-        <div class="usecase-icon"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-        <h3>Creators & Artists</h3>
-        <p>Handle the business side so you can focus on creating. Email management, social media, scheduling, fan engagement — your AI runs your operations while you make art.</p>
-        <div class="quote">"It's something I live." — Nick M., Music Producer</div>
-      </div>
-      <div class="usecase">
-        <div class="usecase-icon"><svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
-        <h3>Founders & Entrepreneurs</h3>
-        <p>Your AI knows your business, your investors, your deadlines. It drafts emails, preps for meetings, tracks action items, and keeps the chaos organized.</p>
-      </div>
-      <div class="usecase">
-        <div class="usecase-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <h3>Families</h3>
-        <p>Coordinate schedules, manage household tasks, remember birthdays, plan events. A family assistant that actually remembers what your kids are allergic to.</p>
-      </div>
-      <div class="usecase">
-        <div class="usecase-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-        <h3>Teams & Enterprises</h3>
-        <p>Deploy AI assistants across your organization. Each team member gets their own AI that knows their role, their projects, and their working style.</p>
-      </div>
+    <div class="section-title">Built for humans.</div>
+    <div class="humans-body">
+      <p>Not built for enterprises. Not built for workflows. Not built for productivity metrics.</p>
     </div>
+    <ul class="humans-list">
+      <li><em>Built for the music producer</em> who needs a partner, not a task list.</li>
+      <li><em>Built for the founder</em> who needs someone who remembers the last six meetings.</li>
+      <li><em>Built for the parent</em> who needs help and doesn't have time to explain everything twice.</li>
+      <li><em>Built for anyone</em> who's ever wished they had someone in their corner. Always.</li>
+    </ul>
+    <div class="humans-quote">"It's something I live."</div>
   </section>
 
-  <!-- PRICING -->
-  <section class="pricing fade-in" id="pricing">
-    <div class="section-label">Pricing</div>
-    <div class="section-title">Choose your hero</div>
-    <div class="section-desc center">Every plan includes persistent memory, real actions, and complete privacy.</div>
-    <div class="pricing-grid">
-      <div class="plan">
-        <div class="plan-name">Personal</div>
-        <div class="plan-price">$29<span>/mo</span></div>
-        <div class="plan-desc">Your AI companion for everyday life</div>
-        <ul class="plan-features">
-          <li>Persistent memory</li>
-          <li>Email & calendar management</li>
-          <li>2 messaging platforms</li>
-          <li>Web search & research</li>
-          <li>Voice messages</li>
-        </ul>
-        <a href="#cta" class="plan-btn">Get Started</a>
-      </div>
-      <div class="plan featured">
-        <div class="plan-name">Professional</div>
-        <div class="plan-price">$79<span>/mo</span></div>
-        <div class="plan-desc">For creators, founders, and operators</div>
-        <ul class="plan-features">
-          <li>Everything in Personal</li>
-          <li>Unlimited platforms</li>
-          <li>File management & creation</li>
-          <li>Social media management</li>
-          <li>Custom skills & workflows</li>
-          <li>Priority support</li>
-        </ul>
-        <a href="#cta" class="plan-btn">Get Started</a>
-      </div>
-      <div class="plan">
-        <div class="plan-name">Enterprise</div>
-        <div class="plan-price">$199<span>/mo</span></div>
-        <div class="plan-desc">AI workforce for your entire team</div>
-        <ul class="plan-features">
-          <li>Everything in Professional</li>
-          <li>Multiple AI agents</li>
-          <li>Team collaboration</li>
-          <li>Custom integrations</li>
-          <li>Dedicated infrastructure</li>
-          <li>White-glove onboarding</li>
-        </ul>
-        <a href="#cta" class="plan-btn">Contact Us</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="testimonials fade-in" id="testimonials">
-    <div class="section-label">What People Say</div>
-    <div class="section-title">Don't take our word for it</div>
-    <div class="testimonial-grid">
-      <div class="testimonial">
-        <div class="testimonial-text">"It's something I live. Not something I use — something I live."</div>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">NM</div>
-          <div>
-            <div class="testimonial-name">Nick M.</div>
-            <div class="testimonial-role">Music Producer, Thailand</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial">
-        <div class="testimonial-text">"I stopped thinking of it as a tool and started thinking of it as a partner. That's when everything changed."</div>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">--</div>
-          <div>
-            <div class="testimonial-name">Coming Soon</div>
-            <div class="testimonial-role">Early Access User</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial">
-        <div class="testimonial-text">"My AI handles my inbox, my scheduling, and my follow-ups. I just show up and do the work that matters."</div>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">--</div>
-          <div>
-            <div class="testimonial-name">Coming Soon</div>
-            <div class="testimonial-role">Early Access User</div>
-          </div>
-        </div>
-      </div>
+  <!-- THE VISION -->
+  <section class="vision fade-in" id="vision">
+    <div class="section-label">Why We Exist</div>
+    <div class="section-title">Why PREVA exists.</div>
+    <div class="vision-body">
+      <p>AI was supposed to change everything. Instead, it gave us chatbots that forget you exist the moment you close the window.</p>
+      <p>We think AI should know you. Really know you. Not just your calendar — your life. Not just your words — your meaning. Not just what you need right now — what you'll need tomorrow.</p>
+      <p class="emphasis">That's not a product. That's a relationship.</p>
+      <p>And that's what we're building.</p>
     </div>
   </section>
 
@@ -604,39 +433,39 @@
     <div class="section-label">FAQ</div>
     <div class="section-title">Questions? Answers.</div>
     <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is my data private?</div>
-      <div class="faq-a">Completely. Your AI is yours. We don't train on your conversations, we don't sell your data, and we don't share it with anyone. Your information stays in your private environment.</div>
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is this just ChatGPT with extra steps?</div>
+      <div class="faq-a">No. ChatGPT forgets you every time you start a new conversation. PREVA never does. It remembers every conversation you've ever had, learns from every interaction, and takes real action in the real world on your behalf. It's not a chat window — it's a partner.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What can my AI actually do?</div>
-      <div class="faq-a">Send and manage emails, schedule meetings, search the web, create documents, manage social media, analyze files, set reminders, coordinate with your team — and it learns new skills over time. If you can describe it, your AI can probably do it.</div>
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is my data private?</div>
+      <div class="faq-a">Completely. Your conversations are yours. We don't train on your data. We don't sell it. We don't share it. Your AI exists for you and you alone.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does it remember things?</div>
-      <div class="faq-a">PREVA uses a proprietary multi-layered memory system. Your AI builds a persistent understanding of you — your preferences, your relationships, your projects, your style. It doesn't just store chat logs. It actually learns.</div>
+      <div class="faq-a">PREVA uses a proprietary memory architecture that preserves your conversation history, preferences, and context across every session. The more you use it, the better it knows you. Nothing is ever lost.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What platforms does it work on?</div>
-      <div class="faq-a">Telegram, Signal, WhatsApp, Slack, Discord, email, and web chat. Your AI meets you wherever you already are — no new app to download.</div>
+      <div class="faq-a">Wherever you already are. Telegram, WhatsApp, Signal, Slack, email, web. No new app to download. Your AI meets you where you live.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I customize my AI's personality?</div>
-      <div class="faq-a">Absolutely. Your AI adapts to your communication style naturally, and you can shape its personality, tone, and behavior to match what you need — professional, casual, creative, or anything in between.</div>
+      <div class="faq-a">Yes. Your AI adapts to you naturally over time, but you can also shape its voice, its priorities, and its style. It becomes yours in every sense.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is this just ChatGPT with extra steps?</div>
-      <div class="faq-a">No. ChatGPT forgets you every conversation. It can't send emails, manage your calendar, or take real action in the world. PREVA builds a persistent AI that knows you and does things for you. It's the difference between a search engine and a partner.</div>
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What can it actually do?</div>
+      <div class="faq-a">Send and manage emails. Handle your calendar. Research anything. Create documents. Post to social media. Set reminders. Draft messages. Manage files. Automate workflows. And it learns new skills over time. If you can describe it, your AI can probably do it.</div>
     </div>
   </section>
 
-  <!-- FINAL CTA -->
+  <!-- WAITLIST CTA -->
   <section class="final-cta fade-in" id="cta">
     <div class="section-label">Ready?</div>
-    <div class="section-title">Meet your AI</div>
-    <div class="section-desc center">Join the waitlist. Be first in line when PREVA launches.</div>
+    <div class="section-title">The future remembers you.</div>
+    <div class="section-desc center">PREVA is coming. Be first.</div>
     <form class="cta-form" onsubmit="event.preventDefault(); this.innerHTML='<p style=\'color:var(--sunlight);font-weight:700;padding:1rem;\'>You\'re on the list. We\'ll be in touch.</p>';">
       <input type="email" class="cta-input" placeholder="your@email.com" required>
-      <button type="submit" class="cta-submit">Join Waitlist</button>
+      <button type="submit" class="cta-submit">Join the Waitlist</button>
     </form>
   </section>
 
@@ -644,8 +473,7 @@
   <footer>
     <div class="footer-logo">PREVA</div>
     <div class="footer-links">
-      <a href="#what">About</a>
-      <a href="#pricing">Pricing</a>
+      <a href="#pitch">About</a>
       <a href="#faq">FAQ</a>
       <a href="mailto:hello@preva.ai">Contact</a>
     </div>
