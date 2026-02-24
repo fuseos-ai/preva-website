@@ -2051,17 +2051,19 @@ footer {
       });
 
       if (res.status === 201) {
-        btn.textContent = "You're on the list!";
-        btn.style.background = '#4ade80';
-        btn.style.color = '#1A1A2E';
+        btn.innerHTML = "&#10003; You're on the list!";
+        btn.style.background = '#22c55e';
+        btn.style.color = '#ffffff';
+        btn.style.letterSpacing = '0.5px';
         emailInput.disabled = true;
         msg.textContent = "Welcome to the future. We'll be in touch.";
         msg.style.display = 'block';
         localStorage.setItem('preva_waitlist', 'true');
       } else if (res.status === 409) {
-        btn.textContent = 'Already on the list!';
-        btn.style.background = '#4ade80';
-        btn.style.color = '#1A1A2E';
+        btn.innerHTML = '&#10003; Already on the list!';
+        btn.style.background = '#22c55e';
+        btn.style.color = '#ffffff';
+        btn.style.letterSpacing = '0.5px';
         emailInput.disabled = true;
         msg.textContent = "You're already signed up. We haven't forgotten you.";
         msg.style.display = 'block';
