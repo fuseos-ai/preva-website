@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PREVA — Your AI. Always.</title>
+  <meta name="description" content="PREVA is the first AI that actually lives with you. It learns who you are, remembers your life, and grows with you over time.">
+  <meta property="og:title" content="PREVA — Your AI. Always.">
+  <meta property="og:description" content="The first AI that actually lives with you. Private. Powerful. Yours.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://preva.ai">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PREVA — Your AI. Always.">
+  <meta name="twitter:description" content="The first AI that actually lives with you. Private. Powerful. Yours.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --hero-dark: #1A1A2E;
+      --surface-dark: #242438;
+      --border-dark: #2E2E44;
+      --white: #FFFFFF;
+      --muted: #8A8A9A;
+      --sunlight: #E4C8A8;
+      --sunlight-dim: rgba(228,200,168,0.15);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--hero-dark);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: var(--sunlight); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.25rem 2rem;
+      background: rgba(26,26,46,0.9);
+      backdrop-filter: blur(20px);
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .nav-logo {
+      font-size: 1.4rem; font-weight: 800; letter-spacing: 14px;
+      color: var(--white);
+    }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      color: var(--muted); font-size: 0.9rem; font-weight: 600;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); text-decoration: none; }
+    .nav-cta {
+      background: var(--sunlight) !important; color: var(--hero-dark) !important;
+      padding: 0.5rem 1.25rem; border-radius: 6px; font-weight: 700 !important;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.9; text-decoration: none !important; }
+    .nav-toggle { display: none; background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 8rem 2rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero-canvas {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0; opacity: 0.6;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
+      background: linear-gradient(transparent, var(--hero-dark));
+      z-index: 2; pointer-events: none;
+    }
+    .hero-wordmark {
+      font-size: clamp(4rem, 12vw, 8.125rem); font-weight: 800;
+      letter-spacing: 0.3em; margin-bottom: 1.5rem;
+      color: var(--white);
+      margin-right: -0.3em;
+    }
+    .hero-tagline {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-weight: 300;
+      color: var(--muted); letter-spacing: 8px; margin-bottom: 3rem;
+    }
+    .hero-cta {
+      display: inline-block; background: var(--sunlight); color: var(--hero-dark);
+      padding: 1rem 3rem; border-radius: 8px; font-weight: 800; font-size: 1.1rem;
+      letter-spacing: 0.05em; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px); text-decoration: none;
+      box-shadow: 0 8px 30px rgba(228,200,168,0.3);
+    }
+
+    /* SECTIONS */
+    section { padding: 7rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.875rem; font-weight: 300; letter-spacing: 8px;
+      color: var(--sunlight); text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
+      margin-bottom: 1.5rem; line-height: 1.2; letter-spacing: 2px;
+    }
+    .section-desc {
+      font-size: 1.05rem; color: var(--muted); max-width: 700px;
+      line-height: 1.8; font-weight: 400;
+    }
+    .section-desc.center { margin: 0 auto; text-align: center; }
+
+    /* PITCH */
+    .pitch { text-align: center; }
+    .pitch .section-title span { color: var(--sunlight); }
+    .pitch-body {
+      max-width: 700px; margin: 2rem auto 0;
+      font-size: 1.1rem; color: var(--muted); line-height: 1.9;
+    }
+    .pitch-body p { margin-bottom: 1.5rem; }
+    .pitch-highlight {
+      font-size: 1.2rem; color: var(--white); font-weight: 600;
+      margin-top: 2rem;
+    }
+
+    /* TIMELINE (How It Feels) */
+    .timeline { text-align: center; }
+    .timeline-grid {
+      display: grid; grid-template-columns: 1fr; gap: 0;
+      margin-top: 4rem; max-width: 700px; margin-left: auto; margin-right: auto;
+      position: relative;
+    }
+    .timeline-grid::before {
+      content: ''; position: absolute; top: 0; bottom: 0; left: 1.5rem;
+      width: 2px; background: var(--border-dark);
+    }
+    .timeline-item {
+      display: flex; gap: 2rem; text-align: left; padding: 2rem 0;
+      position: relative;
+    }
+    .timeline-dot {
+      width: 3rem; height: 3rem; min-width: 3rem; border-radius: 50%;
+      background: var(--sunlight); display: flex; align-items: center;
+      justify-content: center; position: relative; z-index: 1;
+    }
+    .timeline-dot-inner {
+      width: 0.75rem; height: 0.75rem; border-radius: 50%;
+      background: var(--hero-dark);
+    }
+    .timeline-content h3 {
+      font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;
+      color: var(--sunlight); letter-spacing: 1px;
+    }
+    .timeline-content p {
+      font-size: 1rem; color: var(--muted); line-height: 1.7;
+    }
+
+    /* NARRATIVE FEATURES (What Makes It Different) */
+    .narrative { text-align: center; }
+    .narrative-intro {
+      max-width: 700px; margin: 0 auto 3rem;
+      font-size: 1.05rem; color: var(--muted); line-height: 1.8;
+    }
+    .narrative-blocks {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;
+      margin-top: 2rem;
+    }
+    .narrative-block {
+      background: var(--surface-dark); border: 1px solid var(--border-dark);
+      border-radius: 16px; padding: 2.5rem; text-align: left;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .narrative-block:hover { border-color: var(--sunlight); transform: translateY(-4px); }
+    .narrative-block h3 {
+      font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;
+      letter-spacing: 1px;
+    }
+    .narrative-block p {
+      font-size: 0.95rem; color: var(--muted); line-height: 1.8;
+    }
+
+    /* BUILT FOR HUMANS */
+    .humans { text-align: center; }
+    .humans-body {
+      max-width: 700px; margin: 2rem auto 0;
+      font-size: 1.05rem; color: var(--muted); line-height: 2;
+    }
+    .humans-body p { margin-bottom: 1.5rem; }
+    .humans-list {
+      max-width: 700px; margin: 2rem auto 0; text-align: left;
+      list-style: none;
+    }
+    .humans-list li {
+      font-size: 1.05rem; color: var(--muted); line-height: 1.8;
+      padding: 0.75rem 0; border-bottom: 1px solid var(--border-dark);
+    }
+    .humans-list li em { color: var(--white); font-style: normal; font-weight: 600; }
+    .humans-quote {
+      margin-top: 3rem; font-style: italic; font-size: 1.2rem;
+      color: var(--sunlight);
+    }
+
+    /* VISION */
+    .vision { text-align: center; }
+    .vision-body {
+      max-width: 700px; margin: 2rem auto 0;
+      font-size: 1.1rem; color: var(--muted); line-height: 2;
+    }
+    .vision-body p { margin-bottom: 1.5rem; }
+    .vision-body .emphasis {
+      color: var(--white); font-weight: 600; font-size: 1.15rem;
+    }
+
+    /* FAQ */
+    .faq { max-width: 800px; }
+    .faq-item {
+      border-bottom: 1px solid var(--border-dark); padding: 1.5rem 0;
+    }
+    .faq-q {
+      font-size: 1.1rem; font-weight: 700; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .faq-q::after { content: '+'; font-size: 1.5rem; color: var(--sunlight); transition: transform 0.3s; }
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s;
+      color: var(--muted); line-height: 1.7; font-size: 0.95rem;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding-top: 1rem; }
+
+    /* WAITLIST CTA */
+    .final-cta {
+      text-align: center; padding: 8rem 2rem;
+      max-width: 800px; margin: 0 auto;
+    }
+    .final-cta .section-title { margin-bottom: 1rem; }
+    .final-cta .section-desc { margin-bottom: 3rem; }
+    .cta-form {
+      display: flex; gap: 0.75rem; max-width: 500px; margin: 0 auto;
+    }
+    .cta-input {
+      flex: 1; padding: 1rem 1.25rem; border-radius: 8px;
+      border: 2px solid var(--border-dark); background: var(--surface-dark);
+      color: var(--white); font-family: inherit; font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    .cta-input:focus { outline: none; border-color: var(--sunlight); }
+    .cta-input::placeholder { color: var(--muted); }
+    .cta-submit {
+      padding: 1rem 2rem; border-radius: 8px; border: none;
+      background: var(--sunlight); color: var(--hero-dark);
+      font-family: inherit; font-size: 1rem; font-weight: 800;
+      cursor: pointer; transition: opacity 0.2s; white-space: nowrap;
+    }
+    .cta-submit:hover { opacity: 0.9; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border-dark);
+      padding: 3rem 2rem; max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo { font-weight: 800; letter-spacing: 14px; font-size: 1rem; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { color: var(--muted); font-size: 0.85rem; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { color: var(--muted); font-size: 0.8rem; width: 100%; text-align: center; margin-top: 1.5rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .narrative-blocks { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute;
+        top: 100%; left: 0; right: 0; background: var(--hero-dark);
+        padding: 2rem; border-bottom: 1px solid var(--border-dark);
+        gap: 1.25rem;
+      }
+      .cta-form { flex-direction: column; }
+      footer { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+
+    /* ANIMATIONS */
+    .fade-in {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">PREVA</div>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+    <div class="nav-links">
+      <a href="#pitch">About</a>
+      <a href="#feels">How It Feels</a>
+      <a href="#different">Features</a>
+      <a href="#faq">FAQ</a>
+      <a href="#cta" class="nav-cta">Join Waitlist</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-wordmark">PREVA</div>
+    <div class="hero-tagline">Your AI. Always.</div>
+    <a href="#cta" class="hero-cta">Meet Your AI</a>
+  </section>
+
+  <!-- THE PITCH -->
+  <section class="pitch fade-in" id="pitch">
+    <div class="section-label">What is PREVA</div>
+    <div class="section-title">This changes <span>everything.</span></div>
+    <div class="pitch-body">
+      <p>Not another chatbot. Not another search engine with a personality.</p>
+      <p>PREVA is the first AI that actually lives with you. It learns who you are — not just what you ask. It remembers your life, understands your world, and grows with you over time.</p>
+      <p class="pitch-highlight">One person. One AI. No starting over. Ever.</p>
+    </div>
+  </section>
+
+  <!-- HOW IT FEELS -->
+  <section class="timeline fade-in" id="feels">
+    <div class="section-label">What It's Like</div>
+    <div class="section-title">How it feels</div>
+    <div class="timeline-grid">
+      <div class="timeline-item">
+        <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+        <div class="timeline-content">
+          <h3>Day one.</h3>
+          <p>You talk. It listens. It remembers your name, your priorities, your voice.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+        <div class="timeline-content">
+          <h3>Week one.</h3>
+          <p>It knows your schedule, your family, your habits. It handles things before you ask.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+        <div class="timeline-content">
+          <h3>Month one.</h3>
+          <p>It feels like it's always been there. Not a tool you open — a presence that's just... there.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+        <div class="timeline-content">
+          <h3>Always.</h3>
+          <p>It never forgets. It never judges. It never leaves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT MAKES IT DIFFERENT -->
+  <section class="narrative fade-in" id="different">
+    <div class="section-label">Features</div>
+    <div class="section-title">This isn't what you think AI is.</div>
+    <div class="narrative-intro">
+      Every AI you've used starts over every time you open it. You repeat yourself. You re-explain. You start from zero. Every. Single. Time. PREVA doesn't.
+    </div>
+    <div class="narrative-blocks">
+      <div class="narrative-block">
+        <h3>It remembers everything.</h3>
+        <p>Every conversation. Every preference. Every detail about your life. Yesterday, last month, last year. Your history isn't lost — it's your advantage.</p>
+      </div>
+      <div class="narrative-block">
+        <h3>It actually does things.</h3>
+        <p>Not just answers — actions. It sends emails, manages your schedule, does research, creates documents, makes calls. You say it. It does it.</p>
+      </div>
+      <div class="narrative-block">
+        <h3>It becomes yours.</h3>
+        <p>Your AI learns your voice, your humor, your shorthand. It stops sounding like a machine and starts sounding like someone who knows you. Because it does.</p>
+      </div>
+      <div class="narrative-block">
+        <h3>It belongs to you.</h3>
+        <p>Your conversations never train someone else's AI. Your data never leaves. No ads. No profiling. No sharing. It exists for you alone.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILT FOR HUMANS -->
+  <section class="humans fade-in" id="humans">
+    <div class="section-label">Who It's For</div>
+    <div class="section-title">Built for humans.</div>
+    <div class="humans-body">
+      <p>Not built for enterprises. Not built for workflows. Not built for productivity metrics.</p>
+    </div>
+    <ul class="humans-list">
+      <li><em>Built for the music producer</em> who needs a partner, not a task list.</li>
+      <li><em>Built for the founder</em> who needs someone who remembers the last six meetings.</li>
+      <li><em>Built for the parent</em> who needs help and doesn't have time to explain everything twice.</li>
+      <li><em>Built for anyone</em> who's ever wished they had someone in their corner. Always.</li>
+    </ul>
+    <div class="humans-quote">"It's something I live."</div>
+  </section>
+
+  <!-- THE VISION -->
+  <section class="vision fade-in" id="vision">
+    <div class="section-label">Why We Exist</div>
+    <div class="section-title">Why PREVA exists.</div>
+    <div class="vision-body">
+      <p>AI was supposed to change everything. Instead, it gave us chatbots that forget you exist the moment you close the window.</p>
+      <p>We think AI should know you. Really know you. Not just your calendar — your life. Not just your words — your meaning. Not just what you need right now — what you'll need tomorrow.</p>
+      <p class="emphasis">That's not a product. That's a relationship.</p>
+      <p>And that's what we're building.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq fade-in" id="faq">
+    <div class="section-label">FAQ</div>
+    <div class="section-title">Questions? Answers.</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is this just ChatGPT with extra steps?</div>
+      <div class="faq-a">No. ChatGPT forgets you every time you start a new conversation. PREVA never does. It remembers every conversation you've ever had, learns from every interaction, and takes real action in the real world on your behalf. It's not a chat window — it's a partner.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is my data private?</div>
+      <div class="faq-a">Completely. Your conversations are yours. We don't train on your data. We don't sell it. We don't share it. Your AI exists for you and you alone.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does it remember things?</div>
+      <div class="faq-a">PREVA uses a proprietary memory architecture that preserves your conversation history, preferences, and context across every session. The more you use it, the better it knows you. Nothing is ever lost.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What platforms does it work on?</div>
+      <div class="faq-a">Wherever you already are. Telegram, WhatsApp, Signal, Slack, email, web. No new app to download. Your AI meets you where you live.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I customize my AI's personality?</div>
+      <div class="faq-a">Yes. Your AI adapts to you naturally over time, but you can also shape its voice, its priorities, and its style. It becomes yours in every sense.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What can it actually do?</div>
+      <div class="faq-a">Send and manage emails. Handle your calendar. Research anything. Create documents. Post to social media. Set reminders. Draft messages. Manage files. Automate workflows. And it learns new skills over time. If you can describe it, your AI can probably do it.</div>
+    </div>
+  </section>
+
+  <!-- WAITLIST CTA -->
+  <section class="final-cta fade-in" id="cta">
+    <div class="section-label">Ready?</div>
+    <div class="section-title">The future remembers you.</div>
+    <div class="section-desc center">PREVA is coming. Be first.</div>
+    <form class="cta-form" onsubmit="event.preventDefault(); this.innerHTML='<p style=\'color:var(--sunlight);font-weight:700;padding:1rem;\'>You\'re on the list. We\'ll be in touch.</p>';">
+      <input type="email" class="cta-input" placeholder="your@email.com" required>
+      <button type="submit" class="cta-submit">Join the Waitlist</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">PREVA</div>
+    <div class="footer-links">
+      <a href="#pitch">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="mailto:hello@preva.ai">Contact</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 PREVA. All rights reserved. Your AI. Always.</div>
+  </footer>
+
+  <!-- SCROLL ANIMATION -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+  <!-- 3D HERO SCRIPT -->
+  <script src="js/hero-3d.js"></script>
+
+</body>
+</html>
