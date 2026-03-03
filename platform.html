@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PREVA Platform — Enterprise AI That Remembers</title>
+  <meta name="description" content="Deploy persistent, self-healing AI agents for your organization. PREVA remembers everything, connects everywhere, and never starts over.">
+  <meta property="og:title" content="PREVA Platform — Enterprise AI That Remembers">
+  <meta property="og:description" content="Deploy persistent, self-healing AI agents for your organization.">
+  <meta property="og:url" content="https://preva.ai/platform">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --hero-dark: #1A1A2E;
+      --surface-dark: #242438;
+      --border-dark: #2E2E44;
+      --white: #FFFFFF;
+      --muted: #8A8A9A;
+      --sunlight: #E4C8A8;
+      --sunlight-dim: rgba(228,200,168,0.15);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--hero-dark); color: var(--white);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center;
+      background: rgba(26,26,46,0.85); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .nav-logo {
+      font-size: 1.3rem; font-weight: 800; letter-spacing: 0.3em;
+      color: var(--white); text-decoration: none;
+    }
+    .nav-logo span { color: var(--sunlight); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.9rem;
+      font-weight: 500; transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--sunlight) !important; color: var(--hero-dark) !important;
+      padding: 0.5rem 1.25rem; border-radius: 6px; font-weight: 600 !important;
+    }
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
+      padding: 8rem 2rem 4rem;
+    }
+    .hero-badge {
+      display: inline-block; padding: 0.4rem 1rem; border-radius: 100px;
+      border: 1px solid var(--sunlight-dim); background: rgba(228,200,168,0.08);
+      color: var(--sunlight); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.1em; margin-bottom: 2rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800;
+      line-height: 1.1; margin-bottom: 1.5rem; max-width: 800px;
+    }
+    .hero h1 em { font-style: normal; color: var(--sunlight); text-shadow: 0 0 40px var(--sunlight-dim); }
+    .hero p { font-size: 1.2rem; color: var(--muted); max-width: 600px; margin-bottom: 2.5rem; }
+    .hero-cta { display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn-primary {
+      background: var(--sunlight); color: var(--hero-dark);
+      padding: 0.85rem 2rem; border-radius: 8px; text-decoration: none;
+      font-weight: 700; font-size: 1rem; border: 2px solid var(--sunlight); transition: all 0.3s;
+    }
+    .btn-primary:hover { background: transparent; color: var(--sunlight); }
+    .btn-secondary {
+      background: transparent; color: var(--white);
+      padding: 0.85rem 2rem; border-radius: 8px; text-decoration: none;
+      font-weight: 600; border: 2px solid var(--border-dark); transition: all 0.3s;
+    }
+    .btn-secondary:hover { border-color: var(--sunlight-dim); }
+    section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      color: var(--sunlight); font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 1rem; }
+    .section-subtitle { color: var(--muted); font-size: 1.1rem; max-width: 600px; margin-bottom: 3rem; }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .feature-card {
+      background: var(--surface-dark); border: 1px solid var(--border-dark);
+      border-radius: 12px; padding: 2rem; transition: all 0.4s;
+    }
+    .feature-card:hover {
+      border-color: var(--sunlight-dim); transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: var(--sunlight-dim); display: flex;
+      align-items: center; justify-content: center;
+      margin-bottom: 1.25rem; font-size: 1.4rem;
+    }
+    .feature-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .feature-card p { color: var(--muted); font-size: 0.95rem; }
+    .steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem; margin-top: 2rem;
+    }
+    .step { text-align: center; padding: 2rem 1.5rem; }
+    .step-number {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--sunlight-dim); color: var(--sunlight);
+      font-weight: 800; font-size: 1.2rem; margin-bottom: 1.25rem;
+    }
+    .step h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .step p { color: var(--muted); font-size: 0.9rem; }
+    .diff-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; margin-top: 2rem; border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--border-dark);
+    }
+    .diff-item { padding: 2rem; border-bottom: 1px solid var(--border-dark); border-right: 1px solid var(--border-dark); }
+    .diff-item:nth-child(even) { border-right: none; }
+    .diff-item:nth-last-child(-n+2) { border-bottom: none; }
+    .diff-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .diff-label.them { color: #666; }
+    .diff-label.us { color: var(--sunlight); }
+    .diff-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .diff-item p { color: var(--muted); font-size: 0.85rem; }
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .price-card {
+      background: var(--surface-dark); border: 1px solid var(--border-dark);
+      border-radius: 12px; padding: 2.5rem 2rem; text-align: center;
+    }
+    .price-card.featured { border-color: var(--sunlight); box-shadow: 0 0 40px rgba(228,200,168,0.1); }
+    .price-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .price-card .price { font-size: 2.5rem; font-weight: 800; margin: 1rem 0; }
+    .price-card .price span { font-size: 1rem; font-weight: 400; color: var(--muted); }
+    .price-card .price-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .price-features { list-style: none; text-align: left; margin-bottom: 2rem; }
+    .price-features li { padding: 0.5rem 0; font-size: 0.9rem; color: var(--muted); border-bottom: 1px solid var(--border-dark); }
+    .price-features li::before { content: "✓ "; color: var(--sunlight); font-weight: 700; }
+    .price-btn {
+      display: block; width: 100%; padding: 0.75rem; border-radius: 8px;
+      text-decoration: none; font-weight: 600; text-align: center; transition: all 0.3s;
+    }
+    .price-btn.primary { background: var(--sunlight); color: var(--hero-dark); }
+    .price-btn.secondary { background: transparent; color: var(--white); border: 1px solid var(--border-dark); }
+    .final-cta {
+      text-align: center; padding: 6rem 2rem;
+      background: linear-gradient(180deg, transparent, rgba(228,200,168,0.03));
+    }
+    .final-cta h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; }
+    .final-cta p { color: var(--muted); font-size: 1.1rem; margin-bottom: 2rem; }
+    footer { border-top: 1px solid var(--border-dark); padding: 3rem 2rem; text-align: center; }
+    footer p { color: var(--muted); font-size: 0.85rem; }
+    footer a { color: var(--sunlight); text-decoration: none; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s, transform 0.6s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 768px) {
+      nav { padding: 1rem; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .diff-grid { grid-template-columns: 1fr; }
+      .diff-item { border-right: none !important; }
+      section { padding: 4rem 1.25rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-logo">PREVA<span>.</span></a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#get-started" class="nav-cta">Get Started</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-badge">PLATFORM</div>
+    <h1>AI that <em>remembers</em>.<br>For your entire organization.</h1>
+    <p>Deploy persistent AI agents that know your team, your customers, and your business. They learn over time, act on your behalf, and never start over.</p>
+    <div class="hero-cta">
+      <a href="#get-started" class="btn-primary">Start Free</a>
+      <a href="#features" class="btn-secondary">See Features →</a>
+    </div>
+  </div>
+
+  <section id="features">
+    <div class="section-label reveal">CAPABILITIES</div>
+    <h2 class="section-title reveal">Everything your AI needs to actually be useful.</h2>
+    <p class="section-subtitle reveal">Not another chatbot. A persistent, intelligent agent that works for you around the clock.</p>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">🧠</div>
+        <h3>Persistent Memory</h3>
+        <p>Your AI remembers every conversation, every preference, every context. Yesterday, last month, last year. Your history is your advantage.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">⚡</div>
+        <h3>Self-Healing</h3>
+        <p>Automatic failover, health monitoring, and recovery. If something breaks at 3 AM, it fixes itself at 3 AM. No pager required.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🔌</div>
+        <h3>Connect Anywhere</h3>
+        <p>Telegram, WhatsApp, Discord, Slack, email, SMS — your AI meets your team and customers where they already are.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🛡️</div>
+        <h3>Enterprise Security</h3>
+        <p>Complete tenant isolation, encrypted secrets, audit trails, and role-based access. Your data never touches anyone else's.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🧩</div>
+        <h3>Plugin Marketplace</h3>
+        <p>Extend your AI with pre-built skills — email, calendar, CRM, research, coding, and more. Install with one click.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📊</div>
+        <h3>Full Dashboard</h3>
+        <p>Real-time analytics, usage tracking, billing management, and configuration — everything in one place. No CLI required.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🔄</div>
+        <h3>Intelligent Model Routing</h3>
+        <p>Automatically selects the best AI model for each task. Simple questions get fast answers. Complex work gets deep reasoning.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🌐</div>
+        <h3>Multi-Agent Fleet</h3>
+        <p>Deploy teams of specialized AI agents that coordinate with each other. Sales, support, operations — each with their own expertise.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🔑</div>
+        <h3>OAuth Integrations</h3>
+        <p>One-click connect to Google, Notion, Slack, GitHub, Salesforce, and more. Clean disconnect guaranteed — no orphaned data.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works">
+    <div class="section-label reveal">HOW IT WORKS</div>
+    <h2 class="section-title reveal">From zero to your own AI in minutes.</h2>
+    <p class="section-subtitle reveal">No infrastructure to manage. No models to configure. Just sign up and go.</p>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-number">1</div>
+        <h3>Create Your Agent</h3>
+        <p>Give it a name, a role, and a personality. Tell it about your business. It starts learning immediately.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-number">2</div>
+        <h3>Connect Your Channels</h3>
+        <p>Link Telegram, Slack, email, or any channel your team uses. One click per channel. Your AI is reachable everywhere.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-number">3</div>
+        <h3>Add Integrations</h3>
+        <p>Connect Google Workspace, CRM, project tools. Your AI can read emails, schedule meetings, update records — automatically.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-number">4</div>
+        <h3>It Gets Better Every Day</h3>
+        <p>The more you use it, the more it understands. Your AI builds a persistent knowledge base of your world. It never forgets.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label reveal">WHY PREVA</div>
+    <h2 class="section-title reveal">What makes this different.</h2>
+    <p class="section-subtitle reveal">Every AI platform starts over every session. We don't.</p>
+    <div class="diff-grid reveal">
+      <div class="diff-item"><div class="diff-label them">Other AI Platforms</div><h4>Forget everything between sessions</h4><p>Every conversation starts from zero. You repeat yourself endlessly.</p></div>
+      <div class="diff-item"><div class="diff-label us">PREVA</div><h4>Remembers everything, always</h4><p>Persistent memory across every session. Your AI knows your history.</p></div>
+      <div class="diff-item"><div class="diff-label them">Other AI Platforms</div><h4>Answer questions, nothing more</h4><p>Chat interfaces that can't actually do anything in the real world.</p></div>
+      <div class="diff-item"><div class="diff-label us">PREVA</div><h4>Takes action on your behalf</h4><p>Sends emails, manages calendars, updates CRM, files documents — autonomously.</p></div>
+      <div class="diff-item"><div class="diff-label them">Other AI Platforms</div><h4>One model, hope for the best</h4><p>Stuck on a single model regardless of task complexity or cost.</p></div>
+      <div class="diff-item"><div class="diff-label us">PREVA</div><h4>Intelligent model routing</h4><p>Automatically picks the best model for each task. Fast when speed matters. Deep when quality matters.</p></div>
+      <div class="diff-item"><div class="diff-label them">Other AI Platforms</div><h4>Breaks and stays broken</h4><p>Model outages, API failures, rate limits — and you're left waiting.</p></div>
+      <div class="diff-item"><div class="diff-label us">PREVA</div><h4>Self-healing by design</h4><p>Automatic failover, health monitoring, and recovery. Your AI stays online even when providers don't.</p></div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="section-label reveal">PRICING</div>
+    <h2 class="section-title reveal">Simple pricing. No surprises.</h2>
+    <p class="section-subtitle reveal">Start free. Scale when you're ready.</p>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <h3>Starter</h3>
+        <div class="price">Free</div>
+        <p class="price-desc">Perfect for trying PREVA out</p>
+        <ul class="price-features">
+          <li>1 AI agent</li>
+          <li>1 channel connection</li>
+          <li>Persistent memory</li>
+          <li>1,000 messages/month</li>
+          <li>Community support</li>
+        </ul>
+        <a href="#get-started" class="price-btn secondary">Get Started</a>
+      </div>
+      <div class="price-card featured reveal">
+        <h3>Pro</h3>
+        <div class="price">$29<span>/mo</span></div>
+        <p class="price-desc">For professionals and small teams</p>
+        <ul class="price-features">
+          <li>3 AI agents</li>
+          <li>Unlimited channels</li>
+          <li>Persistent memory</li>
+          <li>25,000 messages/month</li>
+          <li>Plugin marketplace access</li>
+          <li>OAuth integrations</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#get-started" class="price-btn primary">Start Pro Trial</a>
+      </div>
+      <div class="price-card reveal">
+        <h3>Enterprise</h3>
+        <div class="price">Custom</div>
+        <p class="price-desc">For organizations at scale</p>
+        <ul class="price-features">
+          <li>Unlimited agents</li>
+          <li>Unlimited channels</li>
+          <li>Tenant isolation</li>
+          <li>Custom model routing</li>
+          <li>Fleet management dashboard</li>
+          <li>SSO / SAML</li>
+          <li>Dedicated support</li>
+          <li>SLA guarantee</li>
+        </ul>
+        <a href="mailto:hello@preva.ai" class="price-btn secondary">Contact Sales</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="final-cta" id="get-started">
+    <h2 class="reveal">Your AI is waiting.</h2>
+    <p class="reveal">Start building with PREVA today. Free forever on our Starter plan.</p>
+    <a href="mailto:hello@preva.ai" class="btn-primary reveal">Get Early Access</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 PREVA Labs LLC. All rights reserved. &nbsp;|&nbsp; <a href="/privacy">Privacy</a> &nbsp;|&nbsp; <a href="/terms">Terms</a> &nbsp;|&nbsp; <a href="/">Home</a></p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
